@@ -148,6 +148,46 @@
       width: 120px;
     }
 
+    /* === FEEDBACK VIEW === */
+    .tip-box {
+      background: #fff8f0;
+      border: 1.5px solid #d47a2b;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .tip-label {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #d47a2b;
+      margin-bottom: 0.6rem;
+    }
+    .tip-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #2a2a2a;
+    }
+
+    .back-btn {
+      display: block;
+      margin: 1.5rem auto 0;
+      padding: 12px 28px;
+      background: none;
+      border: 2px solid #d47a2b;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #d47a2b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: #fff8f0;
+      transform: translateY(-1px);
+    }
+
     /* === RESPONSIVE === */
     @media (max-width: 700px) {
       #screen-map h1 { font-size: 1.4rem; }
@@ -347,7 +387,16 @@
 
   <!-- SCREEN 3: FEEDBACK -->
   <div id="screen-feedback" class="screen">
-    <h1>FEEDBACK PLACEHOLDER</h1>
+    <div class="detail-header">
+      <div class="node-badge" id="feedback-badge">—</div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">💡 Consejo</div>
+      <div class="tip-text" id="feedback-tip">—</div>
+    </div>
+
+    <button class="back-btn" onclick="goToMap()">← Volver al mapa</button>
   </div>
 
 </div>
@@ -409,8 +458,13 @@
   }
 
   function submitAnswer(answer) {
+    if (!currentNode) return;
     currentAnswer = answer;
     answers[currentNode] = answer;
+    const node = nodes[currentNode];
+    document.getElementById('feedback-badge').textContent = node.label;
+    document.getElementById('feedback-tip').textContent = node.tips[answer];
+    updateDots();
     showScreen('screen-feedback');
   }
 
@@ -418,6 +472,20 @@
     currentNode = null;
     currentAnswer = null;
     showScreen('screen-map');
+  }
+
+  function updateDots() {
+    Object.keys(answers).forEach(key => {
+      const dot = document.getElementById('dot-' + key + '-indicator');
+      if (!dot) return;
+      const answer = answers[key];
+      if (answer === null) {
+        dot.style.display = 'none';
+      } else {
+        dot.style.display = 'block';
+        dot.className = 'dot ' + (answer === 'unsure' ? 'unsure' : answer);
+      }
+    });
   }
 </script>
 </body>
