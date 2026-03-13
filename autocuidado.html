@@ -43,6 +43,45 @@
 
 </div>
 <script>
+  const nodes = {
+    alimentacion: {
+      label: "Alimentación",
+      question: "No siempre es fácil llevar una alimentación saludable. ¿Crees que en tu día a día llevas una dieta equilibrada?",
+      tips: {
+        si:     "¡Excelente! Una alimentación equilibrada es la base de tu energía docente. Sigue incorporando variedad y recuerda hidratarte bien durante la jornada.",
+        no:     "No te preocupes, es muy común entre docentes. Prueba preparar comidas simples el fin de semana o llevar snacks saludables al centro para evitar saltarte comidas.",
+        unsure: "Reflexionar ya es un primer paso. Intenta observar tu ingesta durante una semana: ¿hay verduras, proteínas y cereales integrales presentes? Pequeños ajustes marcan la diferencia."
+      }
+    },
+    autoconocimiento: {
+      label: "Autoconocimiento e Inteligencia Emocional",
+      question: "La docencia es una profesión emocionalmente exigente. ¿Eres capaz de identificar y gestionar tus propias emociones cuando estás en el aula?",
+      tips: {
+        si:     "Reconocer y regular tus emociones es una fortaleza enorme. Ese autoconocimiento también modela a tu alumnado cómo gestionar los propios estados emocionales.",
+        no:     "La inteligencia emocional se entrena. Intenta hacer una breve pausa antes de reaccionar en momentos de tensión. Llevar un diario emocional al final del día puede ayudarte a identificar patrones.",
+        unsure: "Eso es normal: las emociones en el aula van muy rápido. Una pista: después de una jornada difícil, pregúntate '¿qué sentí y por qué?' — ese hábito de reflexión es el primer paso."
+      }
+    },
+    mindfulness: {
+      label: "Mindfulness / Atención Consciente",
+      question: "Vivir el presente con atención plena puede reducir el estrés docente. ¿Incorporas alguna práctica de mindfulness o atención consciente en tu rutina?",
+      tips: {
+        si:     "Estupendo. La práctica regular de mindfulness reduce el agotamiento emocional y mejora la concentración. Compártela también con tu alumnado: incluso 3 minutos de respiración consciente al inicio de clase marcan la diferencia.",
+        no:     "No hace falta meditar 30 minutos. Empieza con 3 respiraciones lentas antes de entrar al aula. Esa micropausa de atención consciente ya activa el sistema parasimpático y reduce el estrés.",
+        unsure: "El mindfulness no tiene una única forma. ¿Tienes algún momento del día en que estás totalmente presente — un paseo, tomar café sin móvil? Eso ya es atención consciente. Puedes expandirlo a partir de ahí."
+      }
+    },
+    participacion: {
+      label: "Participación Activa en Grupos Espiritual o Basado en Valores",
+      question: "Conectar con una comunidad que comparte valores da sentido y pertenencia. ¿Participas en algún grupo espiritual, filosófico o de valores compartidos fuera del ámbito escolar?",
+      tips: {
+        si:     "Pertenecer a una comunidad de valores refuerza el propósito personal y previene el agotamiento profesional. Esa conexión contigo mismo/a y con otros es un pilar fundamental de bienestar.",
+        no:     "No es necesario ser parte de un grupo formal. Puedes empezar por identificar tus valores más profundos y buscar actividades — voluntariado, grupos culturales, lecturas compartidas — que te conecten con personas afines.",
+        unsure: "Quizás ya participas sin etiquetarlo así. ¿Hay algún espacio — familia, amigos, comunidad — donde sientas que actúas desde tus valores más profundos? Eso es el núcleo de este tipo de autocuidado."
+      }
+    }
+  };
+
   let currentNode = null;
   let currentAnswer = null;
   const answers = { alimentacion: null, autoconocimiento: null, mindfulness: null, participacion: null };
