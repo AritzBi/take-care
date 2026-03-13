@@ -1,442 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autocuidado Docente - Mapa Conceptual Interactivo</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autocuidado Docente - Mapa Conceptual Interactivo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* === BASE === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f5f3f0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 2.5rem 1rem;
+    }
+    .container { max-width: 1000px; width: 100%; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #f5f3f0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding: 2.5rem 1rem;
-  }
-
-  .container { max-width: 1000px; width: 100%; }
-
-  h1 {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 800;
-    font-size: 2.2rem;
-    color: #2a2a2a;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.5px;
-  }
-  h1 span { color: #d47a2b; }
-
-  .subtitle {
-    text-align: center;
-    color: #888;
-    font-size: 0.9rem;
-    margin-bottom: 2.5rem;
-  }
-
-  /* ---- TREE ---- */
-  .tree { display: flex; flex-direction: column; align-items: center; }
-
-  .node {
-    background: #fff;
-    border: 2px solid #d4d0cb;
-    border-radius: 14px;
-    padding: 14px 28px;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #3a3a3a;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-  }
-
-  .node:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  }
-
-  /* Active / highlighted state */
-  .node.active {
-    transform: translateY(-3px) scale(1.04);
-    box-shadow: 0 8px 30px rgba(212, 122, 43, 0.35);
-    border-color: #d47a2b !important;
-    outline: 3px solid rgba(212, 122, 43, 0.2);
-    outline-offset: 3px;
-  }
-
-  .node.active::after {
-    content: '✓';
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #d47a2b;
-    color: #fff;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(212, 122, 43, 0.4);
-    animation: popIn 0.3s ease;
-  }
-
-  @keyframes popIn {
-    0% { transform: scale(0); }
-    70% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
-
-  /* Dimmed state for non-active siblings */
-  .node.dimmed {
-    opacity: 0.4;
-    filter: grayscale(40%);
-    transform: scale(0.97);
-  }
-
-  .node.root {
-    background: linear-gradient(135deg, #3a3a3a, #4a4a4a);
-    color: #fff; border: none;
-    font-size: 1.15rem; padding: 18px 40px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  }
-  .node.root:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
-  .node.root.active {
-    background: linear-gradient(135deg, #d47a2b, #e8883a);
-    box-shadow: 0 8px 30px rgba(212, 122, 43, 0.4);
-    outline: 3px solid rgba(212, 122, 43, 0.2);
-  }
-
-  .node.fisico {
-    background: linear-gradient(135deg, #e8883a, #d47a2b);
-    color: #fff; border: none;
-    box-shadow: 0 4px 14px rgba(212,122,43,0.3);
-  }
-  .node.fisico.active {
-    background: linear-gradient(135deg, #f59e4f, #e8883a);
-    box-shadow: 0 8px 30px rgba(212, 122, 43, 0.5);
-  }
-
-  .node.gray { background: #e8e4df; border-color: #c9c4bd; }
-  .node.gray.active {
-    background: #fdf0e2;
-    border-color: #d47a2b;
-  }
-
-  .node.sub {
-    font-weight: 500; font-size: 0.88rem;
-    padding: 12px 18px; background: #fff;
-    border: 1.5px solid #ddd; line-height: 1.35;
-    max-width: 180px;
-  }
-  .node.sub.active {
-    background: #fff8f0;
-    border-color: #d47a2b;
-  }
-
-  /* Vertical line */
-  .vline { width: 2px; background: #bbb; transition: background 0.3s; }
-  .vline.short { height: 30px; }
-  .vline.highlight { background: #d47a2b; }
-
-  /* Horizontal bar */
-  .hbar {
-    height: 2px; background: #bbb;
-    width: 72%; margin: 0 auto;
-    transition: background 0.3s;
-  }
-
-  /* Level 1 row */
-  .level1 {
-    display: flex; justify-content: space-around;
-    width: 86%; margin: 0 auto;
-  }
-
-  .branch {
-    display: flex; flex-direction: column;
-    align-items: center; flex: 1;
-  }
-
-  /* Espiritual sub-row */
-  .sub-row {
-    display: flex; gap: 1rem;
-    justify-content: center;
-  }
-  .sub-branch {
-    display: flex; flex-direction: column;
-    align-items: center;
-  }
-
-  .hbar-small {
-    height: 2px; background: #bbb;
-    width: 70%; margin: 0 auto;
-    transition: background 0.3s;
-  }
-
-  /* ---- COUNTER ---- */
-  .counter {
-    text-align: center;
-    margin-top: 2rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.95rem;
-    color: #888;
-    transition: color 0.3s;
-  }
-  .counter strong {
-    color: #d47a2b;
-    font-size: 1.3rem;
-    font-weight: 700;
-  }
-
-  /* ---- RESET ---- */
-  .reset-btn {
-    display: block;
-    margin: 1.2rem auto 0;
-    padding: 10px 28px;
-    background: none;
-    border: 2px solid #d4d0cb;
-    border-radius: 10px;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: #888;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .reset-btn:hover {
-    border-color: #d47a2b;
-    color: #d47a2b;
-    background: #fff8f0;
-  }
-
-  /* ---- LEGEND ---- */
-  .legend {
-    margin-top: 2rem;
-    display: flex; align-items: center;
-    justify-content: center; gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .legend-label {
-    background: #fff; border: 2px solid #d4d0cb;
-    border-radius: 10px; padding: 10px 18px;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 600; font-size: 0.85rem; color: #3a3a3a;
-  }
-  .legend-arrow { color: #d47a2b; font-size: 1.6rem; }
-  .legend-option {
-    border-radius: 22px; padding: 8px 20px;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 500; font-size: 0.85rem;
-    cursor: default; transition: transform 0.15s;
-  }
-  .legend-option:hover { transform: scale(1.05); }
-  .legend-option.si  { background: #d47a2b; color: #fff; }
-  .legend-option.no  { background: #e8e4df; color: #3a3a3a; }
-  .legend-option.unsure {
-    background: #fff; border: 1.5px solid #ccc;
-    color: #666;
-  }
-
-  /* ---- RESPONSIVE ---- */
-  @media (max-width: 700px) {
-    h1 { font-size: 1.4rem; }
-    .level1 { flex-direction: column; align-items: center; gap: 2rem; width: 100%; }
-    .hbar { display: none; }
-    .sub-row { flex-direction: column; align-items: center; }
-    .hbar-small { display: none; }
-    .legend { flex-direction: column; }
-    .node { font-size: 0.9rem; padding: 12px 20px; }
-  }
-</style>
+    /* screens */
+    .screen { display: none; }
+    .screen.active { display: block; }
+  </style>
 </head>
 <body>
 <div class="container">
 
-  <h1>Autocuidado docente · <span>Mapa conceptual</span></h1>
-  <p class="subtitle">Haz clic en cada elemento para resaltarlo</p>
-
-  <div class="tree">
-
-    <!-- Root -->
-    <div class="node root" data-id="root" onclick="toggleNode(this)">Bienestar Global</div>
-    <div class="vline short" data-connector="root"></div>
-
-    <!-- Horizontal bar -->
-    <div class="hbar"></div>
-
-    <!-- Level 1: 3 main branches -->
-    <div class="level1">
-
-      <!-- 1 · Físico -->
-      <div class="branch" data-branch="fisico">
-        <div class="vline short" data-connector="fisico"></div>
-        <div class="node fisico" data-id="fisico" data-branch="fisico" onclick="toggleNode(this)">Autocuidado Físico</div>
-        <div class="vline short" data-connector="fisico-sub"></div>
-        <div class="node sub" data-id="fisico-sub" data-branch="fisico" onclick="toggleNode(this)">Higiene y Cuidado Personal</div>
-      </div>
-
-      <!-- 2 · Emocional -->
-      <div class="branch" data-branch="emocional">
-        <div class="vline short" data-connector="emocional"></div>
-        <div class="node gray" data-id="emocional" data-branch="emocional" onclick="toggleNode(this)">Autocuidado Emocional</div>
-        <div class="vline short" data-connector="emocional-sub"></div>
-        <div class="node sub" data-id="emocional-sub" data-branch="emocional" onclick="toggleNode(this)">Autoconocimiento e Inteligencia Emocional</div>
-      </div>
-
-      <!-- 3 · Espiritual (2 sub-nodes) -->
-      <div class="branch" data-branch="espiritual">
-        <div class="vline short" data-connector="espiritual"></div>
-        <div class="node gray" data-id="espiritual" data-branch="espiritual" onclick="toggleNode(this)">Autocuidado Espiritual</div>
-        <div class="vline short" data-connector="espiritual-bar"></div>
-        <div class="hbar-small" data-connector="espiritual-hbar"></div>
-        <div class="sub-row">
-          <div class="sub-branch">
-            <div class="vline short" data-connector="espiritual-sub1"></div>
-            <div class="node sub" data-id="espiritual-sub1" data-branch="espiritual" onclick="toggleNode(this)">Mindfulness / Atención Consciente</div>
-          </div>
-          <div class="sub-branch">
-            <div class="vline short" data-connector="espiritual-sub2"></div>
-            <div class="node sub" data-id="espiritual-sub2" data-branch="espiritual" onclick="toggleNode(this)">Participación Activa en Grupos Espiritual o Basado en Valores</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+  <!-- SCREEN 1: MAP -->
+  <div id="screen-map" class="screen active">
+    <h1>MAP PLACEHOLDER</h1>
   </div>
 
-  <!-- Counter -->
-  <div class="counter">
-    Seleccionados: <strong id="count">0</strong> / <span id="total">0</span>
+  <!-- SCREEN 2: DETAIL -->
+  <div id="screen-detail" class="screen">
+    <h1>DETAIL PLACEHOLDER</h1>
   </div>
 
-  <button class="reset-btn" onclick="resetAll()">Reiniciar selección</button>
-
-  <!-- Legend -->
-  <div class="legend">
-    <div class="legend-label">Pregunta de autoevaluación</div>
-    <div class="legend-arrow">→</div>
-    <div class="legend-option si">Sí</div>
-    <div class="legend-option no">No</div>
-    <div class="legend-option unsure">No estoy seguro/a</div>
+  <!-- SCREEN 3: FEEDBACK -->
+  <div id="screen-feedback" class="screen">
+    <h1>FEEDBACK PLACEHOLDER</h1>
   </div>
 
 </div>
-
 <script>
-  const allNodes = document.querySelectorAll('.node[data-id]');
-  const totalEl = document.getElementById('total');
-  const countEl = document.getElementById('count');
+  let currentNode = null;
+  let currentAnswer = null;
+  const answers = { alimentacion: null, autoconocimiento: null, mindfulness: null, participacion: null };
 
-  totalEl.textContent = allNodes.length;
-
-  function toggleNode(el) {
-    el.classList.toggle('active');
-    updateCount();
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
   }
 
-  function updateCount() {
-    const active = document.querySelectorAll('.node.active').length;
-    countEl.textContent = active;
-
-    // If some are active, dim the inactive ones
-    if (active > 0) {
-      allNodes.forEach(n => {
-        if (!n.classList.contains('active')) {
-          n.classList.add('dimmed');
-        } else {
-          n.classList.remove('dimmed');
-        }
-      });
-      // Highlight connectors for active branches
-      highlightConnectors();
-    } else {
-      // Nothing active — reset all
-      allNodes.forEach(n => n.classList.remove('dimmed'));
-      clearConnectors();
-    }
+  function openNode(nodeKey) {
+    currentNode = nodeKey;
+    showScreen('screen-detail');
   }
 
-  function highlightConnectors() {
-    // Reset connectors first
-    clearConnectors();
-
-    // Highlight root connector if root is active
-    if (document.querySelector('.node.root.active')) {
-      setConnector('root', true);
-    }
-
-    // Highlight branch connectors
-    const branches = ['fisico', 'emocional', 'espiritual'];
-    branches.forEach(branch => {
-      const branchNodes = document.querySelectorAll(`.node[data-branch="${branch}"]`);
-      const anyActive = Array.from(branchNodes).some(n => n.classList.contains('active'));
-      if (anyActive) {
-        // Highlight branch main connector
-        setConnector(branch, true);
-
-        // Highlight sub-connectors for active sub-nodes
-        branchNodes.forEach(n => {
-          if (n.classList.contains('active')) {
-            const id = n.getAttribute('data-id');
-            setConnector(id, true);
-            // For sub items
-            if (id.includes('-sub')) {
-              setConnector(id, true);
-            }
-          }
-        });
-
-        // Espiritual special: highlight horizontal bar if either sub is active
-        if (branch === 'espiritual') {
-          const sub1Active = document.querySelector('.node[data-id="espiritual-sub1"]')?.classList.contains('active');
-          const sub2Active = document.querySelector('.node[data-id="espiritual-sub2"]')?.classList.contains('active');
-          if (sub1Active || sub2Active) {
-            setConnector('espiritual-bar', true);
-            setConnector('espiritual-hbar', true);
-            if (sub1Active) setConnector('espiritual-sub1', true);
-            if (sub2Active) setConnector('espiritual-sub2', true);
-          }
-        }
-      }
-    });
+  function submitAnswer(answer) {
+    currentAnswer = answer;
+    answers[currentNode] = answer;
+    showScreen('screen-feedback');
   }
 
-  function setConnector(name, highlight) {
-    const els = document.querySelectorAll(`[data-connector="${name}"]`);
-    els.forEach(el => {
-      if (highlight) {
-        el.classList.add('highlight');
-        el.style.background = '#d47a2b';
-      } else {
-        el.classList.remove('highlight');
-        el.style.background = '#bbb';
-      }
-    });
-  }
-
-  function clearConnectors() {
-    document.querySelectorAll('[data-connector]').forEach(el => {
-      el.classList.remove('highlight');
-      el.style.background = '#bbb';
-    });
-  }
-
-  function resetAll() {
-    allNodes.forEach(n => {
-      n.classList.remove('active', 'dimmed');
-    });
-    clearConnectors();
-    countEl.textContent = '0';
+  function goToMap() {
+    currentNode = null;
+    currentAnswer = null;
+    showScreen('screen-map');
   }
 </script>
-
 </body>
 </html>
