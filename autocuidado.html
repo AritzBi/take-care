@@ -15,6 +15,7 @@
       display: flex;
       justify-content: center;
       padding: 2.5rem 1rem;
+      overflow-x: hidden;
     }
     .container { max-width: 1000px; width: 100%; }
 
@@ -148,59 +149,6 @@
       width: 120px;
     }
 
-    /* === FEEDBACK VIEW === */
-    .tip-box {
-      background: #fff8f0;
-      border: 1.5px solid #d47a2b;
-      border-radius: 14px;
-      padding: 1.5rem;
-      margin: 2rem 0;
-    }
-    .tip-label {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
-      color: #d47a2b;
-      margin-bottom: 0.6rem;
-    }
-    .tip-text {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #2a2a2a;
-    }
-
-    .back-btn {
-      display: block;
-      margin: 1.5rem auto 0;
-      padding: 12px 28px;
-      background: none;
-      border: 2px solid #d47a2b;
-      border-radius: 10px;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #d47a2b;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .back-btn:hover {
-      background: #fff8f0;
-      transform: translateY(-1px);
-    }
-
-    /* === RESPONSIVE === */
-    @media (max-width: 700px) {
-      #screen-map h1 { font-size: 1.4rem; }
-      .level1 { flex-direction: column; align-items: center; gap: 2rem; width: 100%; }
-      .hbar { display: none; }
-      .sub-row { flex-direction: column; align-items: center; }
-      .hbar-small { display: none; }
-      .node { font-size: 0.9rem; padding: 12px 20px; }
-      .question-text { font-size: 0.95rem; }
-      .answer-row { flex-direction: column; align-items: center; }
-      .legend { flex-direction: column; }
-    }
-
     /* === DETAIL VIEW === */
     .detail-header {
       margin-bottom: 2rem;
@@ -289,6 +237,60 @@
     .legend-option.si     { background: #d47a2b; color: #fff; }
     .legend-option.no     { background: #e8e4df; color: #3a3a3a; }
     .legend-option.unsure { background: #fff; border: 1.5px solid #ccc; color: #666; }
+
+    /* === FEEDBACK VIEW === */
+    .tip-box {
+      background: #fff8f0;
+      border: 1.5px solid #d47a2b;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .tip-label {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #d47a2b;
+      margin-bottom: 0.6rem;
+    }
+    .tip-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #2a2a2a;
+    }
+
+    .back-btn {
+      display: block;
+      margin: 1.5rem auto 0;
+      padding: 12px 28px;
+      background: none;
+      border: 2px solid #d47a2b;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #d47a2b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: #fff8f0;
+      transform: translateY(-1px);
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 700px) {
+      #screen-map h1 { font-size: 1.4rem; }
+      .level1 { flex-direction: column; align-items: center; gap: 2rem; width: 100%; }
+      .hbar { display: none; }
+      .sub-row { flex-direction: column; align-items: center; }
+      .hbar-small { display: none; }
+      .node { font-size: 0.9rem; padding: 12px 20px; }
+      .question-text { font-size: 0.95rem; }
+      .answer-row { flex-direction: column; align-items: center; }
+      .legend { flex-direction: column; }
+      .back-btn { width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -441,7 +443,6 @@
   };
 
   let currentNode = null;
-  let currentAnswer = null;
   const answers = { alimentacion: null, autoconocimiento: null, mindfulness: null, participacion: null };
 
   function showScreen(id) {
@@ -459,7 +460,6 @@
 
   function submitAnswer(answer) {
     if (!currentNode) return;
-    currentAnswer = answer;
     answers[currentNode] = answer;
     const node = nodes[currentNode];
     document.getElementById('feedback-badge').textContent = node.label;
@@ -470,7 +470,6 @@
 
   function goToMap() {
     currentNode = null;
-    currentAnswer = null;
     showScreen('screen-map');
   }
 
@@ -483,7 +482,7 @@
         dot.style.display = 'none';
       } else {
         dot.style.display = 'block';
-        dot.className = 'dot ' + (answer === 'unsure' ? 'unsure' : answer);
+        dot.className = 'dot ' + answer;
       }
     });
   }
