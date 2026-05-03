@@ -18,8 +18,6 @@
       overflow-x: hidden;
     }
     .container { max-width: 1000px; width: 100%; }
-
-    /* screens */
     .screen { display: none; }
     .screen.active { display: block; }
 
@@ -34,16 +32,13 @@
       letter-spacing: -0.5px;
     }
     #screen-map h1 span { color: #d47a2b; }
-
     .subtitle {
       text-align: center;
       color: #888;
       font-size: 0.9rem;
       margin-bottom: 2.5rem;
     }
-
     .tree { display: flex; flex-direction: column; align-items: center; }
-
     .node {
       background: #fff;
       border: 2px solid #d4d0cb;
@@ -56,7 +51,6 @@
       text-align: center;
       position: relative;
     }
-
     .node.root {
       background: linear-gradient(135deg, #3a3a3a, #4a4a4a);
       color: #fff;
@@ -65,19 +59,16 @@
       padding: 18px 40px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.15);
     }
-
     .node.fisico {
       background: linear-gradient(135deg, #e8883a, #d47a2b);
       color: #fff;
       border: none;
       box-shadow: 0 4px 14px rgba(212,122,43,0.3);
     }
-
     .node.gray {
       background: #e8e4df;
       border-color: #c9c4bd;
     }
-
     .node.sub {
       font-weight: 500;
       font-size: 0.88rem;
@@ -93,8 +84,6 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(212,122,43,0.2);
     }
-
-    /* Answer dot indicator on leaf nodes */
     .node.sub .dot {
       position: absolute;
       top: -7px;
@@ -103,56 +92,28 @@
       height: 14px;
       border-radius: 50%;
       border: 2px solid #fff;
+      display: none;
     }
     .dot.si     { background: #22c55e; }
     .dot.no     { background: #ef4444; }
     .dot.unsure { background: #eab308; }
-
     .vline { width: 2px; background: #bbb; }
     .vline.short { height: 30px; }
-
-    .hbar {
-      height: 2px;
-      background: #bbb;
-      width: 72%;
-      margin: 0 auto;
-    }
-
+    .hbar { height: 2px; background: #bbb; width: 72%; margin: 0 auto; }
+    .hbar-small { height: 2px; background: #bbb; width: 120px; }
+    .hbar-wide  { height: 2px; background: #bbb; width: 220px; }
     .level1 {
       display: flex;
       justify-content: space-around;
       width: 86%;
       margin: 0 auto;
     }
+    .branch { display: flex; flex-direction: column; align-items: center; flex: 1; }
+    .sub-row { display: flex; gap: 1rem; justify-content: center; }
+    .sub-branch { display: flex; flex-direction: column; align-items: center; }
 
-    .branch {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
-    }
-
-    .sub-row {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .sub-branch {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hbar-small {
-      height: 2px;
-      background: #bbb;
-      width: 120px;
-    }
-
-    /* === DETAIL VIEW === */
-    .detail-header {
-      margin-bottom: 2rem;
-    }
+    /* === SHARED SCREEN ELEMENTS === */
+    .detail-header { margin-bottom: 2rem; }
     .node-badge {
       display: inline-block;
       background: #e8e4df;
@@ -164,7 +125,53 @@
       font-size: 0.95rem;
       color: #3a3a3a;
     }
+    .next-btn {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 14px 36px;
+      background: #d47a2b;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .next-btn:hover {
+      background: #c06a1e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(212,122,43,0.3);
+    }
+    .back-btn {
+      display: block;
+      margin: 1.5rem auto 0;
+      padding: 12px 28px;
+      background: none;
+      border: 2px solid #d47a2b;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #d47a2b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover { background: #fff8f0; transform: translateY(-1px); }
 
+    /* === DEFINITION SCREEN === */
+    .definition-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #2a2a2a;
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.5rem 2rem;
+      border: 1.5px solid #d4d0cb;
+    }
+
+    /* === QUESTION SCREEN === */
     .question-block {
       display: flex;
       gap: 1rem;
@@ -179,12 +186,7 @@
       line-height: 1;
       flex-shrink: 0;
     }
-    .question-text {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #2a2a2a;
-    }
-
+    .question-text { font-size: 1.1rem; line-height: 1.6; color: #2a2a2a; }
     .answer-row {
       display: flex;
       gap: 1rem;
@@ -206,8 +208,6 @@
     .answer-btn.si     { background: #d47a2b; color: #fff; }
     .answer-btn.no     { background: #e8e4df; color: #3a3a3a; }
     .answer-btn.unsure { background: #fff; border: 1.5px solid #ccc; color: #666; }
-
-    /* legend at bottom of detail */
     .legend {
       margin-top: 3rem;
       display: flex;
@@ -238,57 +238,85 @@
     .legend-option.no     { background: #e8e4df; color: #3a3a3a; }
     .legend-option.unsure { background: #fff; border: 1.5px solid #ccc; color: #666; }
 
-    /* === FEEDBACK VIEW === */
-    .tip-box {
-      background: #fff8f0;
-      border: 1.5px solid #d47a2b;
-      border-radius: 14px;
-      padding: 1.5rem;
-      margin: 2rem 0;
-    }
-    .tip-label {
+    /* === RESPONSE SCREEN === */
+    .response-heading {
       font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
+      font-weight: 800;
+      font-size: 1.8rem;
       color: #d47a2b;
-      margin-bottom: 0.6rem;
+      margin-bottom: 1rem;
     }
-    .tip-text {
+    .response-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #2a2a2a;
+      margin-bottom: 1.5rem;
+    }
+    .learn-more-teaser {
+      font-size: 0.9rem;
+      color: #888;
+      font-style: italic;
+    }
+
+    /* === EVIDENCE SCREEN === */
+    .evidence-intro {
       font-size: 1rem;
+      line-height: 1.6;
+      color: #2a2a2a;
+      margin-bottom: 1.5rem;
+    }
+    .evidence-bullets { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .evidence-bullets li {
+      background: #fff;
+      border-left: 4px solid #d47a2b;
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.2rem;
+      font-size: 0.95rem;
       line-height: 1.6;
       color: #2a2a2a;
     }
 
-    .back-btn {
-      display: block;
-      margin: 1.5rem auto 0;
-      padding: 12px 28px;
-      background: none;
-      border: 2px solid #d47a2b;
-      border-radius: 10px;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 600;
+    /* === TIPS SCREEN === */
+    .tips-intro { font-size: 1rem; line-height: 1.6; color: #2a2a2a; margin-bottom: 1.2rem; }
+    .tips-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+    .tips-list li {
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
       font-size: 0.95rem;
+      line-height: 1.6;
+      color: #2a2a2a;
+    }
+    .tips-list li::before {
+      content: '→';
       color: #d47a2b;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
     }
-    .back-btn:hover {
-      background: #fff8f0;
-      transform: translateY(-1px);
+    .tips-links { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+    .tip-link {
+      display: inline-block;
+      color: #d47a2b;
+      font-size: 0.9rem;
+      text-decoration: underline;
+      word-break: break-all;
     }
+    .tip-link:hover { color: #c06a1e; }
 
     /* === RESPONSIVE === */
     @media (max-width: 700px) {
       #screen-map h1 { font-size: 1.4rem; }
       .level1 { flex-direction: column; align-items: center; gap: 2rem; width: 100%; }
       .hbar { display: none; }
-      .sub-row { flex-direction: column; align-items: center; }
       .hbar-small { display: none; }
+      .hbar-wide  { display: none; }
+      .sub-row { flex-direction: column; align-items: center; }
       .node { font-size: 0.9rem; padding: 12px 20px; }
       .question-text { font-size: 0.95rem; }
       .answer-row { flex-direction: column; align-items: center; }
       .legend { flex-direction: column; }
+      .next-btn { width: 100%; }
       .back-btn { width: 100%; }
     }
   </style>
@@ -300,40 +328,68 @@
   <div id="screen-map" class="screen active">
     <h1>Autocuidado docente · <span>Mapa conceptual</span></h1>
     <p class="subtitle">Haz clic en los elementos naranjas para reflexionar</p>
-
     <div class="tree">
-
-      <!-- Root -->
       <div class="node root">Bienestar Global</div>
       <div class="vline short"></div>
       <div class="hbar"></div>
-
-      <!-- Level 1: 3 branches -->
       <div class="level1">
 
-        <!-- Físico -->
+        <!-- Físico: 3 sub-nodes -->
         <div class="branch">
           <div class="vline short"></div>
           <div class="node fisico">Autocuidado Físico</div>
           <div class="vline short"></div>
-          <div class="node sub" onclick="openNode('alimentacion')">
-            Alimentación
-            <span class="dot" id="dot-alimentacion-indicator" style="display:none"></span>
+          <div class="hbar-wide"></div>
+          <div class="sub-row">
+            <div class="sub-branch">
+              <div class="vline short"></div>
+              <div class="node sub" onclick="app.openNode('alimentacion')">
+                Alimentación
+                <span class="dot" id="dot-alimentacion"></span>
+              </div>
+            </div>
+            <div class="sub-branch">
+              <div class="vline short"></div>
+              <div class="node sub" onclick="app.openNode('actividad-fisica')">
+                Actividad Física
+                <span class="dot" id="dot-actividad-fisica"></span>
+              </div>
+            </div>
+            <div class="sub-branch">
+              <div class="vline short"></div>
+              <div class="node sub" onclick="app.openNode('higiene')">
+                Higiene y Cuidado Personal
+                <span class="dot" id="dot-higiene"></span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Emocional -->
+        <!-- Emocional: 2 sub-nodes -->
         <div class="branch">
           <div class="vline short"></div>
           <div class="node gray">Autocuidado Emocional</div>
           <div class="vline short"></div>
-          <div class="node sub" onclick="openNode('autoconocimiento')">
-            Autoconocimiento e Inteligencia Emocional
-            <span class="dot" id="dot-autoconocimiento-indicator" style="display:none"></span>
+          <div class="hbar-small"></div>
+          <div class="sub-row">
+            <div class="sub-branch">
+              <div class="vline short"></div>
+              <div class="node sub" onclick="app.openNode('autoconocimiento')">
+                Autoconocimiento e Inteligencia Emocional
+                <span class="dot" id="dot-autoconocimiento"></span>
+              </div>
+            </div>
+            <div class="sub-branch">
+              <div class="vline short"></div>
+              <div class="node sub" onclick="app.openNode('afrontamiento')">
+                Estrategias de Afrontamiento Adaptativas
+                <span class="dot" id="dot-afrontamiento"></span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Espiritual -->
+        <!-- Espiritual: 2 sub-nodes -->
         <div class="branch">
           <div class="vline short"></div>
           <div class="node gray">Autocuidado Espiritual</div>
@@ -342,16 +398,16 @@
           <div class="sub-row">
             <div class="sub-branch">
               <div class="vline short"></div>
-              <div class="node sub" onclick="openNode('mindfulness')">
+              <div class="node sub" onclick="app.openNode('mindfulness')">
                 Mindfulness / Atención Consciente
-                <span class="dot" id="dot-mindfulness-indicator" style="display:none"></span>
+                <span class="dot" id="dot-mindfulness"></span>
               </div>
             </div>
             <div class="sub-branch">
               <div class="vline short"></div>
-              <div class="node sub" onclick="openNode('participacion')">
+              <div class="node sub" onclick="app.openNode('participacion')">
                 Participación Activa en Grupos Espiritual o Basado en Valores
-                <span class="dot" id="dot-participacion-indicator" style="display:none"></span>
+                <span class="dot" id="dot-participacion"></span>
               </div>
             </div>
           </div>
@@ -361,23 +417,29 @@
     </div>
   </div>
 
-  <!-- SCREEN 2: DETAIL -->
-  <div id="screen-detail" class="screen">
+  <!-- SCREEN 2: DEFINITION -->
+  <div id="screen-definition" class="screen">
     <div class="detail-header">
-      <div class="node-badge" id="detail-badge">—</div>
+      <div class="node-badge" id="def-badge">—</div>
     </div>
+    <div class="definition-text" id="def-text">—</div>
+    <button class="next-btn" onclick="app.goNext('screen-definition')">Continuar →</button>
+  </div>
 
+  <!-- SCREEN 3: QUESTION -->
+  <div id="screen-question" class="screen">
+    <div class="detail-header">
+      <div class="node-badge" id="q-badge">—</div>
+    </div>
     <div class="question-block">
       <div class="question-icon">?</div>
-      <div class="question-text" id="detail-question">—</div>
+      <div class="question-text" id="q-text">—</div>
     </div>
-
     <div class="answer-row">
-      <button class="answer-btn si"     onclick="submitAnswer('si')">Sí</button>
-      <button class="answer-btn no"     onclick="submitAnswer('no')">No</button>
-      <button class="answer-btn unsure" onclick="submitAnswer('unsure')">No estoy seguro/a</button>
+      <button class="answer-btn si"     onclick="app.submitAnswer('si')">Sí</button>
+      <button class="answer-btn no"     onclick="app.submitAnswer('no')">No</button>
+      <button class="answer-btn unsure" onclick="app.submitAnswer('unsure')">No estoy seguro/a</button>
     </div>
-
     <div class="legend">
       <div class="legend-label">Pregunta de autoevaluación</div>
       <div class="legend-arrow">→</div>
@@ -387,105 +449,39 @@
     </div>
   </div>
 
-  <!-- SCREEN 3: FEEDBACK -->
-  <div id="screen-feedback" class="screen">
+  <!-- SCREEN 4: RESPONSE -->
+  <div id="screen-response" class="screen">
     <div class="detail-header">
-      <div class="node-badge" id="feedback-badge">—</div>
+      <div class="node-badge" id="resp-badge">—</div>
     </div>
+    <div class="response-heading" id="resp-heading">—</div>
+    <div class="response-text" id="resp-text">—</div>
+    <div class="learn-more-teaser" id="resp-learnmore">—</div>
+    <button class="next-btn" onclick="app.goNext('screen-response')">Ver más →</button>
+  </div>
 
-    <div class="tip-box">
-      <div class="tip-label">💡 Consejo</div>
-      <div class="tip-text" id="feedback-tip">—</div>
+  <!-- SCREEN 5: EVIDENCE -->
+  <div id="screen-evidence" class="screen">
+    <div class="detail-header">
+      <div class="node-badge" id="ev-badge">—</div>
     </div>
+    <div class="evidence-intro" id="ev-intro">—</div>
+    <ul class="evidence-bullets" id="ev-bullets"></ul>
+    <button class="next-btn" onclick="app.goNext('screen-evidence')">Ver consejos →</button>
+  </div>
 
-    <button class="back-btn" onclick="goToMap()">← Volver al mapa</button>
+  <!-- SCREEN 6: TIPS -->
+  <div id="screen-tips" class="screen">
+    <div class="detail-header">
+      <div class="node-badge" id="tips-badge">—</div>
+    </div>
+    <div class="tips-intro" id="tips-intro">—</div>
+    <ul class="tips-list" id="tips-list"></ul>
+    <div class="tips-links" id="tips-links"></div>
+    <button class="back-btn" onclick="app.goToMap()">← Volver al mapa</button>
   </div>
 
 </div>
-<script>
-  const nodes = {
-    alimentacion: {
-      label: "Alimentación",
-      question: "No siempre es fácil llevar una alimentación saludable. ¿Crees que en tu día a día llevas una dieta equilibrada?",
-      tips: {
-        si:     "¡Excelente! Una alimentación equilibrada es la base de tu energía docente. Sigue incorporando variedad y recuerda hidratarte bien durante la jornada.",
-        no:     "No te preocupes, es muy común entre docentes. Prueba preparar comidas simples el fin de semana o llevar snacks saludables al centro para evitar saltarte comidas.",
-        unsure: "Reflexionar ya es un primer paso. Intenta observar tu ingesta durante una semana: ¿hay verduras, proteínas y cereales integrales presentes? Pequeños ajustes marcan la diferencia."
-      }
-    },
-    autoconocimiento: {
-      label: "Autoconocimiento e Inteligencia Emocional",
-      question: "La docencia es una profesión emocionalmente exigente. ¿Eres capaz de identificar y gestionar tus propias emociones cuando estás en el aula?",
-      tips: {
-        si:     "Reconocer y regular tus emociones es una fortaleza enorme. Ese autoconocimiento también modela a tu alumnado cómo gestionar los propios estados emocionales.",
-        no:     "La inteligencia emocional se entrena. Intenta hacer una breve pausa antes de reaccionar en momentos de tensión. Llevar un diario emocional al final del día puede ayudarte a identificar patrones.",
-        unsure: "Eso es normal: las emociones en el aula van muy rápido. Una pista: después de una jornada difícil, pregúntate '¿qué sentí y por qué?' — ese hábito de reflexión es el primer paso."
-      }
-    },
-    mindfulness: {
-      label: "Mindfulness / Atención Consciente",
-      question: "Vivir el presente con atención plena puede reducir el estrés docente. ¿Incorporas alguna práctica de mindfulness o atención consciente en tu rutina?",
-      tips: {
-        si:     "Estupendo. La práctica regular de mindfulness reduce el agotamiento emocional y mejora la concentración. Compártela también con tu alumnado: incluso 3 minutos de respiración consciente al inicio de clase marcan la diferencia.",
-        no:     "No hace falta meditar 30 minutos. Empieza con 3 respiraciones lentas antes de entrar al aula. Esa micropausa de atención consciente ya activa el sistema parasimpático y reduce el estrés.",
-        unsure: "El mindfulness no tiene una única forma. ¿Tienes algún momento del día en que estás totalmente presente — un paseo, tomar café sin móvil? Eso ya es atención consciente. Puedes expandirlo a partir de ahí."
-      }
-    },
-    participacion: {
-      label: "Participación Activa en Grupos Espiritual o Basado en Valores",
-      question: "Conectar con una comunidad que comparte valores da sentido y pertenencia. ¿Participas en algún grupo espiritual, filosófico o de valores compartidos fuera del ámbito escolar?",
-      tips: {
-        si:     "Pertenecer a una comunidad de valores refuerza el propósito personal y previene el agotamiento profesional. Esa conexión contigo mismo/a y con otros es un pilar fundamental de bienestar.",
-        no:     "No es necesario ser parte de un grupo formal. Puedes empezar por identificar tus valores más profundos y buscar actividades — voluntariado, grupos culturales, lecturas compartidas — que te conecten con personas afines.",
-        unsure: "Quizás ya participas sin etiquetarlo así. ¿Hay algún espacio — familia, amigos, comunidad — donde sientas que actúas desde tus valores más profundos? Eso es el núcleo de este tipo de autocuidado."
-      }
-    }
-  };
-
-  let currentNode = null;
-  const answers = { alimentacion: null, autoconocimiento: null, mindfulness: null, participacion: null };
-
-  function showScreen(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-
-  function openNode(nodeKey) {
-    currentNode = nodeKey;
-    const node = nodes[nodeKey];
-    document.getElementById('detail-badge').textContent = node.label;
-    document.getElementById('detail-question').textContent = node.question;
-    showScreen('screen-detail');
-  }
-
-  function submitAnswer(answer) {
-    if (!currentNode) return;
-    answers[currentNode] = answer;
-    const node = nodes[currentNode];
-    document.getElementById('feedback-badge').textContent = node.label;
-    document.getElementById('feedback-tip').textContent = node.tips[answer];
-    updateDots();
-    showScreen('screen-feedback');
-  }
-
-  function goToMap() {
-    currentNode = null;
-    showScreen('screen-map');
-  }
-
-  function updateDots() {
-    Object.keys(answers).forEach(key => {
-      const dot = document.getElementById('dot-' + key + '-indicator');
-      if (!dot) return;
-      const answer = answers[key];
-      if (answer === null) {
-        dot.style.display = 'none';
-      } else {
-        dot.style.display = 'block';
-        dot.className = 'dot ' + answer;
-      }
-    });
-  }
-</script>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
