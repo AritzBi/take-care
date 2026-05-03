@@ -51,6 +51,7 @@ function submitAnswer(answer) {
 }
 
 function goNext(fromScreen) {
+  // renderResponse/Evidence/Tips are pre-rendered in submitAnswer; only question needs lazy render here
   if (fromScreen === 'screen-definition') {
     renderQuestion(NODES[currentNode]);
   }
