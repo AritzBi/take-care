@@ -58,12 +58,7 @@ export function renderTips(node) {
 export function updateDots(answers) {
   Object.entries(answers).forEach(([key, answer]) => {
     const dot = document.getElementById('dot-' + key);
-    if (!dot) return;
-    if (!answer) {
-      dot.style.display = 'none';
-    } else {
-      dot.style.display = 'block';
-      dot.className = 'dot ' + answer;
-    }
+    dot.style.display = 'block';
+    dot.className = 'dot ' + answer;
   });
 }
