@@ -27,6 +27,7 @@ export default {
 
   evidence: {
     intro: 'La actividad física regular aporta beneficios amplios: reduce el riesgo de muchas enfermedades, mejora la salud mental y aumenta la calidad y esperanza de vida. Los efectos aparecen incluso con niveles moderados de ejercicio y en todas las edades.',
+    images: ['assets/images/slide028_1.png', 'assets/images/slide028.png'],
     bullets: [
       'Menor riesgo de enfermedad cardiovascular, diabetes tipo 2, cáncer de mama y colon, osteoporosis y síndrome metabólico (Aditya Mahindru et al., 2023; Malm et al., 2019).',
       'El ejercicio reduce síntomas de depresión, ansiedad y estrés, mejora el estado de ánimo, el sueño y la calidad de vida (Aditya Mahindru et al., 2023).',
@@ -37,6 +38,7 @@ export default {
 
   tips: {
     intro: 'Pequeños cambios en el día a día pueden marcar la diferencia:',
+    images: ['assets/images/slide028_2.png', 'assets/images/slide029.png'],
     items: [
       'Realiza diferentes ráfagas de movimiento breves de 5 a 10 minutos (ejemplo: subir escaleras).',
       'Por cada media hora sentado, levántate y estírate o camina durante 2 minutos.',

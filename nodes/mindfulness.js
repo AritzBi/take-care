@@ -36,6 +36,7 @@ export default {
 
   tips: {
     intro: 'Integrar micro-pausas conscientes de 30–60 segundos a lo largo del día ayuda a regular el estrés en tiempo real:',
+    images: ['assets/images/slide089_1.png', 'assets/images/slide089.png', 'assets/images/slide089_2.png'],
     items: [
       'Lávate los dientes prestando atención a las sensaciones y movimientos.',
       'Durante la ducha, nota el contacto del agua con el cuerpo.',

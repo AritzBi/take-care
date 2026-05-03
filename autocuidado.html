@@ -304,6 +304,10 @@
     }
     .tip-link:hover { color: #c06a1e; }
 
+    /* === NODE IMAGES === */
+    .node-imgs { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 1.5rem 0; }
+    .node-img { max-width: 100%; width: auto; max-height: 340px; border-radius: 10px; object-fit: contain; }
+
     /* === RESPONSIVE === */
     @media (max-width: 700px) {
       #screen-map h1 { font-size: 1.4rem; }
@@ -467,6 +471,7 @@
     </div>
     <div class="evidence-intro" id="ev-intro">—</div>
     <ul class="evidence-bullets" id="ev-bullets"></ul>
+    <div class="node-imgs" id="ev-images"></div>
     <button class="next-btn" onclick="app.goNext('screen-evidence')">Ver consejos →</button>
   </div>
 
@@ -477,6 +482,7 @@
     </div>
     <div class="tips-intro" id="tips-intro">—</div>
     <ul class="tips-list" id="tips-list"></ul>
+    <div class="node-imgs" id="tips-images"></div>
     <div class="tips-links" id="tips-links"></div>
     <button class="back-btn" onclick="app.goToMap()">← Volver al mapa</button>
   </div>

@@ -27,6 +27,7 @@ export default {
 
   evidence: {
     intro: 'La evidencia científica muestra consistentemente que:',
+    images: ['assets/images/slide016.png'],
     bullets: [
       'Mejores patrones dietéticos se asocian con mayor calidad de vida en dominios físicos, emocionales y sociales, tanto en adultos como en niños y adolescentes (Godos et al., 2025).',
       'Dietas de tipo mediterráneo o similares muestran menor probabilidad de depresión, y en algunos casos también menos ansiedad y estrés (Kris-Etherton et al., 2020).',

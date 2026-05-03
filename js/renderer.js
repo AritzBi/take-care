@@ -28,6 +28,14 @@ export function renderEvidence(node) {
     li.textContent = b;
     ul.appendChild(li);
   });
+  const imgDiv = document.getElementById('ev-images');
+  imgDiv.innerHTML = '';
+  (node.evidence.images || []).forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.className = 'node-img';
+    imgDiv.appendChild(img);
+  });
 }
 
 export function renderTips(node) {
@@ -40,6 +48,15 @@ export function renderTips(node) {
     const li = document.createElement('li');
     li.textContent = item;
     ul.appendChild(li);
+  });
+
+  const imgDiv = document.getElementById('tips-images');
+  imgDiv.innerHTML = '';
+  (node.tips.images || []).forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.className = 'node-img';
+    imgDiv.appendChild(img);
   });
 
   const linksDiv = document.getElementById('tips-links');

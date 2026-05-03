@@ -27,6 +27,7 @@ export default {
 
   evidence: {
     intro: 'La investigación acumulada muestra de forma consistente que las competencias emocionales se relacionan con:',
+    images: ['assets/images/slide061.png', 'assets/images/slide076.jpg'],
     bullets: [
       'Niveles más elevados de bienestar subjetivo, mayor satisfacción con la vida, una presencia más frecuente de emociones positivas y menores niveles de malestar psicológico (Caballero-García y Ruiz, 2025).',
       'La inteligencia emocional permite manejar de manera más eficaz las exigencias emocionales cotidianas y promueve estrategias adaptativas de afrontamiento del estrés.',
@@ -36,6 +37,7 @@ export default {
 
   tips: {
     intro: 'Algunos puntos importantes que permiten fortalecer tu inteligencia emocional (Ronda, 2017):',
+    images: ['assets/images/slide059.png'],
     items: [
       'Identifica la emoción: aprende a reconocer las emociones y presta atención a la reacción del cuerpo.',
       'Presta más atención a tu respuesta que a la situación en sí.',
