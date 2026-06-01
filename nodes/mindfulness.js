@@ -43,7 +43,7 @@ export default {
       'Al conducir o caminar, sé consciente de la respiración y del entorno.',
       'Antes de empezar una tarea, detente brevemente para conectar con el cuerpo y la respiración.',
       'Recuerda que no es necesario dedicar mucho tiempo: unos pocos minutos al día, de forma regular, ya pueden marcar la diferencia.',
-      'En el campus de Bilbao de la Universidad de Deusto se practica mindfulness de 14h a 15h en la capilla.',
+      'En el campus de Bilbao de la Universidad de Deusto se practica mindfulness los martes de 14h a 15h en la capilla.',
     ],
     links: [
       {
